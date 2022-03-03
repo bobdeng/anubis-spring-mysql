@@ -28,7 +28,8 @@ public class PartnerKeyRepositoryImpl implements PartnerKeyRepository {
 
     @Override
     public Stream<PartnerKey> findKeys(Partner partner) {
-        return null;
+        return partnerKeyDAO.findByPartnerId(partner.id())
+                .map(PartnerKeyDO::toEntity);
     }
 
     @Override

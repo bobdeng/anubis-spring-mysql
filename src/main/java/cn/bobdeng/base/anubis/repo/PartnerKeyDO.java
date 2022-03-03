@@ -1,5 +1,9 @@
 package cn.bobdeng.base.anubis.repo;
 
+import cn.bobdeng.anubis.AccessKey;
+import cn.bobdeng.anubis.ExpireDate;
+import cn.bobdeng.anubis.PartnerKey;
+import cn.bobdeng.anubis.PartnerKeyId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +25,8 @@ public class PartnerKeyDO {
     @Column(name = "pub_key")
     private String key;
     private Long expireAt;
+
+    public PartnerKey toEntity() {
+        return new PartnerKey(PartnerKeyId.of(id), new AccessKey(key), new ExpireDate(expireAt));
+    }
 }

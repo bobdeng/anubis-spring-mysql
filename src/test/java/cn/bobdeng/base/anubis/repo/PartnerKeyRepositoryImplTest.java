@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static cn.bobdeng.anubis.Partners.partnerKeyRepository;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
@@ -44,5 +47,23 @@ class PartnerKeyRepositoryImplTest extends IntegrationTest {
         PartnerKeyDO partnerKeyDO = partnerKeyDAO.findAll().iterator().next();
         assertThat(partnerKeyDO.getKey(), is(key.getKey()));
         assertThat(partnerKeyDO.getPartnerId(), is(partner.id()));
+    }
+
+    @Test
+    public void find_partner_keys() {
+        Partner partner = new Partner(PartnerId.of(100), null, null);
+        partnerKeyDAO.save(PartnerKeyDO.builder()
+                .key(key)
+                .partnerId(partner.id())
+                .build());
+        partnerKeyDAO.save(PartnerKeyDO.builder()
+                .key(key)
+                .partnerId(partner.id() + 1)
+                .build());
+
+        List<PartnerKey> keys = partnerKeyRepository.findKeys(partner).collect(Collectors.toList());
+
+        assertThat(keys.size(), is(1));
+
     }
 }
