@@ -1,3 +1,1 @@
-# 使用方法
-## 实现 PermissionSessionGetter 接口
-返回当前登陆的用户ID
+![example workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg)
