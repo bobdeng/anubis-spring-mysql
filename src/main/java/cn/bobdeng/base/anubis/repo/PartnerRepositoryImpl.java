@@ -19,11 +19,15 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 
     @Override
     public void save(Partners partners, Partner partner) {
-
+        partnerDAO.save(PartnerDO.builder()
+                .code(partner.code())
+                .name(partner.name())
+                .build());
     }
 
     @Override
     public Optional<Partner> findByCode(Partners partners, PartnerCode code) {
-        return Optional.empty();
+        return partnerDAO.findByCode(code.getCode())
+                .map(PartnerDO::toEntity);
     }
 }
