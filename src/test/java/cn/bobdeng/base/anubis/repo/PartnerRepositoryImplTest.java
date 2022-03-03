@@ -5,6 +5,7 @@ import cn.bobdeng.anubis.PartnerCode;
 import cn.bobdeng.anubis.PartnerName;
 import cn.bobdeng.anubis.Partners;
 import cn.bobdeng.base.anubis.IntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,13 +14,17 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static cn.bobdeng.anubis.Partners.partnerRepository;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 class PartnerRepositoryImplTest extends IntegrationTest {
     @Autowired
     PartnerDAO partnerDAO;
+
+    @BeforeEach
+    public void setup() {
+        partnerDAO.deleteAll();
+    }
 
     @Test
     public void should_save() {

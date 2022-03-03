@@ -19,7 +19,11 @@ public class PartnerKeyRepositoryImpl implements PartnerKeyRepository {
 
     @Override
     public void save(Partner partner, PartnerKey partnerKey) {
-
+        partnerKeyDAO.save(PartnerKeyDO.builder()
+                .expireAt(partnerKey.expireAt())
+                .partnerId(partner.id())
+                .key(partnerKey.key())
+                .build());
     }
 
     @Override

@@ -18,6 +18,7 @@ public class PartnerKeyDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int partnerId;
+    @Column(name = "pub_key")
     private String key;
     private Long expireAt;
 }
