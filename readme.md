@@ -1,1 +1,1 @@
-![example workflow](https://github.com/bobdeng/anubis-spring-mysql/actions/workflows/test.yml/badge.svg)
+![CI](https://github.com/bobdeng/anubis-spring-mysql/actions/workflows/ci.yml/badge.svg)
