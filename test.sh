@@ -1,1 +1,1 @@
-./gradlew clean test --debug
+./gradlew clean test 
