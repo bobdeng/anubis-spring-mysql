@@ -34,6 +34,10 @@ public class PartnerKeyRepositoryImpl implements PartnerKeyRepository {
 
     @Override
     public void save(PartnerKey partnerKey) {
-
+        partnerKeyDAO.findById(partnerKey.id())
+                .ifPresent(partnerKeyDO -> {
+                    partnerKeyDO.setExpireAt(partnerKey.expireAt());
+                    partnerKeyDAO.save(partnerKeyDO);
+                });
     }
 }

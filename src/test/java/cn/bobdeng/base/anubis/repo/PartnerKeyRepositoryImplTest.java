@@ -66,4 +66,22 @@ class PartnerKeyRepositoryImplTest extends IntegrationTest {
         assertThat(keys.size(), is(1));
 
     }
+
+    @Test
+    public void set_expire_at() {
+        Partner partner = new Partner(PartnerId.of(100), null, null);
+        PartnerKeyDO partnerKeyDO = PartnerKeyDO.builder()
+                .key(key)
+                .partnerId(partner.id())
+                .build();
+        partnerKeyDAO.save(partnerKeyDO);
+
+        long expireAt = System.currentTimeMillis();
+        PartnerKey partnerKey = partnerKeyDO.toEntity();
+        partnerKey.setExpireAt(expireAt);
+        partnerKeyRepository.save(partnerKey);
+
+        PartnerKeyDO afterSetExpireAt = partnerKeyDAO.findAll().iterator().next();
+        assertThat(afterSetExpireAt.getExpireAt(), is(expireAt));
+    }
 }
